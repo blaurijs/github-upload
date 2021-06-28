@@ -26,6 +26,19 @@
 		website: 'https://svelte.dev'
 	};
 	import Login from './Login.svelte';
+	import EachBlocks from './EachBlocks.svelte';
+	import KeyedEachBlock from './KeyedEachBlocks.svelte';
+import Await from './Await.svelte';
+	let things = [
+		{ id: 1, name: 'apple' },
+		{ id: 2, name: 'banana' },
+		{ id: 3, name: 'carrot' },
+		{ id: 4, name: 'doughnut' },
+		{ id: 5, name: 'egg' },
+	];
+	function handleThingClick() {
+		things = things.slice(1);
+	}
 </script>
 
 <main>
@@ -39,14 +52,32 @@
 		Add a number
 	</button>
 	<p>{numbers.join(' + ')} = {sum}</p>
+
 	<h2>Nested.svelte component with prop</h2>
 	<Nested answer={42}/>
+
 	<h2>Nested.svelte component no prop</h2>
 	<Nested/>
+
 	<h2>Info.svelte component many props</h2>
 	<Info name={pkg.name} version={pkg.version} speed={pkg.speed} website={pkg.website}/>
+
 	<h2>Login.svelte component</h2>
 	<Login/>
+
+	<h2>EachBlocks.svelte component</h2>
+	<EachBlocks/>
+
+	<h2>KeyedEachBlocks.svelte component</h2>
+	<button on:click={handleThingClick}>
+		Remove first thing
+	</button>
+	{#each things as thing}
+		<KeyedEachBlock name={thing.name}/>
+	{/each}
+
+	<h2>Await.svelte component</h2>
+	<Await/>
 	
 </main>
 
